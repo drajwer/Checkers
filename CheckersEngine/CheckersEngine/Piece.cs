@@ -17,13 +17,16 @@ namespace Checkers
 
         public virtual bool IsCorrectDestination(bool attackFlag, Position destination, CheckerBoard board)
         {
+            return true;
             throw new NotImplementedException();
             //jesli attackFlag jest true to jesli jest bicie i destination jest oddalone o dwa zwraca true
             //jesli attackFlag jest false  to zwraca true jesli destination jest oddalone o jeden
         }
 
         public virtual bool CanAttack(CheckerBoard board)
-        { throw new NotImplementedException();
+        {
+            return true;
+            throw new NotImplementedException();
             //sprawdza czy pionek ma bicie
         }
 
