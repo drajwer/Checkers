@@ -56,4 +56,12 @@ namespace Checkers
             throw new NotImplementedException();
         }
     }
+
+    class Program
+    {
+        public static void Main()
+        {
+            Console.WriteLine("Checkers");
+        }
+    }
 }
