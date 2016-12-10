@@ -9,10 +9,11 @@ namespace Checkers
     public class CheckerBoard
     {
         public Piece[,] board;
-        
+
         public CheckerBoard()
-        { throw new NotImplementedException();
-               //ustawia pionki w board
+        {
+            //ustawia pionki w board
+            throw new NotImplementedException();
         }
 
         public void DrawBoard(Player player)

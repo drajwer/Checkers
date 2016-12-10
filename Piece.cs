@@ -8,11 +8,11 @@ namespace Checkers
 {
    public class Piece
     {
-        protected Color pieceColor;
+        public Color pieceColor { get; } // Kacper: zmienilem pole na wlasciwosc tylko do odczytu, przydatne np w klasie player
         protected Position position;
-
         public Piece(Color color, Position defaultPosition)
-        { throw new NotImplementedException();
+        {
+            throw new NotImplementedException();
         }
 
         public virtual bool IsCorrectDestination(bool attackFlag, Position destination, CheckerBoard board)
