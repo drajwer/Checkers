@@ -25,7 +25,7 @@ namespace Checkers
         {
             //przechodzi po liscie pionkow i jesli jest mozliwe bicie dla ktoregos pionka
             //zwraca true
-            foreach (Piece x in board.board)
+            foreach (Piece x in pieces)
                 if (x.CanAttack(board))
                     return true;
             return false;
