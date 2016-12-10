@@ -62,6 +62,7 @@ namespace Checkers
         public static void Main()
         {
             Console.WriteLine("Checkers");
+            Console.ReadKey();
         }
     }
 }

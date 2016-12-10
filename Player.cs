@@ -17,14 +17,18 @@ namespace Checkers
         }
 
         public bool IsCorrectPiece(Piece piece)
-        { throw new NotImplementedException();
-            //sprawdza czy kolor pionka jest taki sam jak gracza
+        {
+            return piece.pieceColor == color;
         }
 
         public bool IsPossibleAttack(CheckerBoard board)
-        { throw new NotImplementedException();
+        {
             //przechodzi po liscie pionkow i jesli jest mozliwe bicie dla ktoregos pionka
             //zwraca true
+            foreach (Piece x in board.board)
+                if (x.CanAttack(board))
+                    return true;
+            return false;
         }
 
         public void Input(out Piece piece, out Position destination, CheckerBoard board)
