@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Checkers
 {
-    public enum Color { WHITE, BLACK };
+    public enum Color { UNDEFINED, WHITE, BLACK };
 
     class Game
     {
@@ -41,7 +41,10 @@ namespace Checkers
                     gameState = State.GAMEOVER;
 
                 currentPlayer.Turn(board);
-                //zmienia bierzacego gracza
+                if (currentPlayer == player1)
+                    currentPlayer = player2;
+                else
+                    currentPlayer = player1;
             }
         }
 
@@ -61,8 +64,26 @@ namespace Checkers
     {
         public static void Main()
         {
+            // mozna sobie cos posprawdzac
             Console.WriteLine("Checkers");
+            int[,] array = { {1, 0, 1, 0, 1, 0, 1, 0},
+                             {0, 1, 0, 1, 0, 1, 0, 1},
+                             {1, 0, 1, 0, 1, 0, 1, 0},
+                             {0, 0, 0, 0, 0, 0, 0, 0},
+                             {0, 0, 0, 2, 0, 0, 0, 0},
+                             {2, 0, 2, 0, 1, 0, 2, 0},
+                             {0, 2, 0, 2, 0, 2, 0, 2},
+                             {2, 0, 2, 0, 2, 0, 2, 0},
+                                };
+            var myBoard = new CheckerBoard(array);
+            var myPlayer = new Player(Color.BLACK, null);
+            if (myBoard[2, 2] == null)
+                Console.WriteLine("NULL REFERENCE");
+            else Console.WriteLine("IsCorrectPiece: " + myPlayer.IsCorrectPiece(myBoard[2, 2]));
+            myBoard.DrawBoard(myPlayer);
+            Console.WriteLine("CanAttack: " + myBoard[4, 2].CanAttack(myBoard));
             Console.ReadKey();
+
         }
     }
 }

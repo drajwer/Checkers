@@ -97,6 +97,12 @@ namespace Checkers
         }
 
         //4x funkcja sprawdzajaca po przekatnej 1 pole od siebie
+        public override string ToString() // pomocnicza do wypisywania
+        {
+            if (Color.BLACK == pieceColor)
+                return "#";
+            return "@";
+        }
     }
 
     public class Queen:Piece

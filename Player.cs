@@ -11,6 +11,11 @@ namespace Checkers
         protected Color color;
         protected List<Piece> pieces;
 
+        public Player(Color c, List<Piece> _pieces)
+        {
+            color = c;
+            pieces = _pieces;
+        }
         public Piece SelectPiece()
         { throw new NotImplementedException();
             //wprowadzenie pozycje pionkow
@@ -39,7 +44,6 @@ namespace Checkers
 
         public void Turn(CheckerBoard board)
         {
-            throw new NotImplementedException();
 
             bool attackFlag = IsPossibleAttack(board);
             Piece piece;
@@ -55,7 +59,7 @@ namespace Checkers
             if(attackFlag)
             {
                 Piece deletePiece = piece.FunkcjaCudzika(destination);
-                deletePiece.RemovePiece(board, this.pieces);
+                deletePiece.RemovePiece(board, pieces);
             }
             piece.Move(board, destination);
 
@@ -63,23 +67,17 @@ namespace Checkers
             {
                 Piece pp;
 
-                Input(out pp, out destination, board);
-
-                if(pp.Equals(piece))
+                while (true)
                 {
-                    pp.IsCorrectDestination(pp.CanAttack(board), destination, board);
-                    piece = pp;
+                    Input(out pp, out destination, board);
+                    if(pp.Equals(piece))
+                        if (piece.IsCorrectDestination(attackFlag, destination, board))
+                            break;
                 }
-
-                // dostosowac
-                //if (attackFlag)
-                //{
-                //    Piece deletePiece = piece.FunkcjaCudzika(destination);
-                //    deletePiece.RemovePiece(board, this.pieces);
-                //}
-                //piece.Move(board, destination);
-               
-
+                
+                  Piece deletePiece = piece.FunkcjaCudzika(destination);
+                  deletePiece.RemovePiece(board, this.pieces);
+                  piece.Move(board, destination);
             }
             if (piece.IsBecomeQueen())
                 piece.ChangePieceToQueen(board, this.pieces);
