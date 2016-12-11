@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,7 +12,8 @@ namespace Checkers
         protected Position position;
         public Piece(Color color, Position defaultPosition)
         {
-            throw new NotImplementedException();
+            pieceColor = color;
+            position = defaultPosition;
         }
 
         public virtual bool IsCorrectDestination(bool attackFlag, Position destination, CheckerBoard board)
