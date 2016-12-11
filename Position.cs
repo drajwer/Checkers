@@ -21,6 +21,17 @@ namespace Checkers
                 return false;
             return true;
         }
+        public bool IsPositionOnBias(Position dest)
+        {
+            // sprawdzenie czy this znajduje sie po skosie z dest
+            int a1 = 1; // (y - (y + 1)) / (x - (x + 1)) Równania prostych !!!
+            int b1 = y - x; //y - a1 * x
+            int a2 = -1; // (y - (y + 1) / (x - (x - 1))
+            int b2 = y + x; // y - a2 * x
+            if (dest.y == a1 * dest.x + b1 || dest.y == a2 * dest.x + b2)
+                return true;
+            return false;
+        }
 
         // Dodalem pomocnicze funkcje do "chodzenia po planszy"
         public Position NE()

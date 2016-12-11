@@ -30,7 +30,8 @@ namespace Checkers
             {
                 int diffX = destination.x - position.x;
                 int diffY = destination.y - position.y;
-                if ((diffX == -1 || diffX == 1) && (diffY == -1 || diffY == 1))
+                if ((pieceColor == Color.WHITE && diffY == 1 && Math.Abs(diffX) == 1) 
+                    || (pieceColor == Color.BLACK && diffY == -1 && Math.Abs(diffX) == 1))
                 {
                     if (board[destination] == null)
                         return true;
@@ -110,6 +111,43 @@ namespace Checkers
         public Queen(Color color, Position defaultPosition):base(color,defaultPosition)
             {}
 
+        public override bool CheckAttack(CheckerBoard board, Position destination)
+        {
+            List<Piece> piecesBetweenDestAndPos = new List<Piece>();
+            Position iterPosition = new Position(position.x, position.y);
+            int directionX = destination.x > position.x ? 1 : -1;
+            int directionY = destination.y > position.y ? 1 : -1;
+            if(!destination.IsPositionInRange())
+            {
+                return false;
+            }
+            if(board[destination] != null)
+            {
+                return false;
+            }
+            if(Math.Abs(position.x - destination.x) < 2)
+            {
+                return false;
+            }
+            if(position.IsPositionOnBias(destination))
+            { 
+                while (iterPosition.x != destination.x) // wiemy ze jestesmy na przekatnej, porownujemy tylko x
+                {
+                    iterPosition.x += directionX;
+                    iterPosition.y += directionY;
+                    if (board[iterPosition] != null)
+                    { 
+                        piecesBetweenDestAndPos.Add(board[iterPosition]);
+                    }
+                }
+            }
+            if(piecesBetweenDestAndPos.Count == 1)
+            {
+                if (piecesBetweenDestAndPos[0].pieceColor != pieceColor)
+                    return true;
+            }
+            return false;
+        }
         public override bool CanAttack(CheckerBoard board)
         { throw new NotImplementedException(); }
 
