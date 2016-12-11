@@ -18,7 +18,25 @@ namespace Checkers
 
         public virtual bool IsCorrectDestination(bool attackFlag, Position destination, CheckerBoard board)
         {
-            throw new NotImplementedException();
+            if (!destination.IsPositionInRange())
+            {
+                return false;
+            }
+            if (attackFlag)
+            {
+                return CheckAttack(board, destination);
+            }
+            else
+            {
+                int diffX = destination.x - position.x;
+                int diffY = destination.y - position.y;
+                if ((diffX == -1 || diffX == 1) && (diffY == -1 || diffY == 1))
+                {
+                    if (board[destination] == null)
+                        return true;
+                }
+            }
+            return false;
             //jesli attackFlag jest true to jesli jest bicie i destination jest oddalone o dwa zwraca true
             //jesli attackFlag jest false  to zwraca true jesli destination jest oddalone o jeden
         }
@@ -93,3 +111,4 @@ namespace Checkers
         { throw new NotImplementedException(); }
     }
 }
+
